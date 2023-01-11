@@ -68,6 +68,9 @@ instance/
 # Scrapy stuff:
 .scrapy
 
+# Postgresql stuff:
+deploy/data/db
+
 # Sphinx documentation
 docs/_build/
 
