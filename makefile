@@ -1,10 +1,13 @@
 BASE_DIR := .
 
 start-app:
-	python $(BASE_DIR)\manage.py runserver
+	docker-compose up
+
+build-app:
+	docker-compose build
 
 migrate:
-	python $(BASE_DIR)\manage.py migrate
+	docker-compose exec -T web python app/manage.py migrate
 
 gen-migration:
-	python $(BASE_DIR)\manage.py makemigrations
+	docker-compose exec -T web python app/manage.py makemigrations
