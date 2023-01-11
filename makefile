@@ -7,7 +7,7 @@ build-app:
 	docker-compose build
 
 migrate:
-	docker-compose exec -T web python app/manage.py migrate
+	docker-compose exec -T web python manage.py migrate
 
 gen-migration:
-	docker-compose exec -T web python app/manage.py makemigrations
+	docker-compose exec -T web python manage.py makemigrations

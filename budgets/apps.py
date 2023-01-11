@@ -10,7 +10,7 @@ class BudgetConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'budgets'
 
-    def import_models(self):
+    def import_models(self) -> None:
         self.models = self.apps.all_models[self.label]
 
         if module_has_submodule(self.module, MODELS_MODULE_NAME):

@@ -35,13 +35,13 @@ MIGRATION_MODULES = {
 # Application definition
 
 INSTALLED_APPS = [
-    'budgets.apps.BudgetConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'budgets.apps.BudgetConfig'
 ]
 
 MIDDLEWARE = [
