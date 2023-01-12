@@ -1,12 +1,12 @@
 # Create your tests here.
-from django import test, urls
+from django import urls
 
 from budgets.tests.integration.views import utils
 
 class LoginTests(utils.ApiTestCase):
     def setUp(self) -> None:
         super().setUp()
-        self.login_payload = {
+        self.payload = {
             "username": self.user.username,
             "password": 'pass'
         }
@@ -15,7 +15,7 @@ class LoginTests(utils.ApiTestCase):
         # Given
 
         # When
-        response = self.client.post(urls.reverse('login'), self.login_payload)
+        response = self.client.post(urls.reverse('login'), self.payload)
         # Then
         self.assertIn('access', response.data)
         self.assertIn('refresh', response.data)
@@ -24,23 +24,23 @@ class LoginTests(utils.ApiTestCase):
         # Given
 
         # When
-        response = self.client.post(urls.reverse('login'), self.login_payload)
+        response = self.client.post(urls.reverse('login'), self.payload)
         # Then
         self.assertEqual(response.status_code, 200)
 
     def test_user_can_not_login_with_incorrect_password(self) -> None:
         # Given
-        self.login_payload['password'] = 'NOT_A_PASSWORD'
+        self.payload['password'] = 'NOT_A_PASSWORD'
         # When
-        response = self.client.post(urls.reverse('login'), self.login_payload)
+        response = self.client.post(urls.reverse('login'), self.payload)
         # Then
         self.assertEqual(response.status_code, 401)
 
 
     def test_user_can_not_login_with_not_existing_account(self) -> None:
         # Given
-        self.login_payload['username'] = 'IDONOTEXIST'
+        self.payload['username'] = 'IDONOTEXIST'
         # When
-        response = self.client.post(urls.reverse('login'), self.login_payload)
+        response = self.client.post(urls.reverse('login'), self.payload)
         # Then
         self.assertEqual(response.status_code, 401)

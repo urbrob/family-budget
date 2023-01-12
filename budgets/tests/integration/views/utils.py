@@ -1,7 +1,7 @@
 from django import test
-from budgets.tests import factories
+from budgets.tests import factories, utils
 
-class ApiTestCase(test.TestCase):
+class ApiTestCase(utils.BaseTest):
     def setUp(self) -> None:
         self.user = factories.UserFactory()
         self.client = test.Client()
