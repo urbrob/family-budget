@@ -1,2 +1,9 @@
 django
 psycopg2
+djangorestframework
+markdown
+django-filter
+djangorestframework-simplejwt
+inject
+factory-boy
+Faker

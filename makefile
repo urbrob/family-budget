@@ -11,3 +11,6 @@ migrate:
 
 gen-migration:
 	docker-compose exec -T web python manage.py makemigrations
+
+test:
+	docker-compose exec -T web python manage.py test budgets
