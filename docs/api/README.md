@@ -55,3 +55,59 @@ I am using readme docs just for simplicity of application. Normally i would use 
     "status": "OK"
 }
 ````
+
+## Budget creation
+#### Date of contract: 11.01.2023
+#### UR: api/v1/budget
+####  METHOD: POST
+### BODY:
+````
+{
+    "name": str,
+}
+````
+
+### Example body:
+````
+{
+    "name": "House",
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````
+## Budget list
+#### Date of contract: 11.01.2023
+#### UR: api/v1/budget
+####  METHOD: GET
+### PARAMS:
+````
+{
+    "limit": int,
+    "offset": int,
+}
+````
+### Example body:
+````
+{
+    "limit": 1,
+    "offset": 1,
+}
+````
+### Response:
+````
+{
+    "count": int,
+    "next": Optional[str],
+    "previous": Optional[str],
+    "results": [
+        {
+            "id": int,
+            "name": str,
+        }
+    ]
+}
+````

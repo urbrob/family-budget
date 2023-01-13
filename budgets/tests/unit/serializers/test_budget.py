@@ -1,4 +1,4 @@
-from django import test
+from budgets.tests import factories
 from budgets.infrastructure.views import serializers
 from budgets.tests.unit.serializers import utils
 
@@ -26,5 +26,21 @@ class CreateBudgetSerializerTestCase(utils.SerializerTestCase):
         serializer.is_valid()
         # Then
         self.assertValidationErrors(serializer, expected_errors)
+
+
+class BudgetSerializerTestCase(utils.SerializerTestCase):
+    def setUp(self) -> None:
+        super().setUp()
+        self.budget = factories.BudgetFactory(owner=self.user)
+
+    def test_deserialize_with_budget_model(self) -> None:
+        # Given
+        # When
+        serializer = serializers.BudgetSerializer(self.budget)
+        data = serializer.data
+        # Then
+        self.assertEqual(self.budget.name, data['name'])
+        self.assertEqual(self.budget.id, data['id'])
+
 
 

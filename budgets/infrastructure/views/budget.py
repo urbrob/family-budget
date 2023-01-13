@@ -1,9 +1,11 @@
-from budgets.application import use_cases, exceptions
+from budgets.application import use_cases
 from budgets.infrastructure.views import serializers
-from rest_framework import permissions, views, status
+from budgets.infrastructure import models
+from rest_framework import permissions, views, status, pagination
 
 
-class BudgetView(views.APIView):
+
+class BudgetView(views.APIView, pagination.LimitOffsetPagination):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request: views.Request) -> views.Response:
@@ -16,3 +18,9 @@ class BudgetView(views.APIView):
             use_cases.CreateBudgetUseCase().execute(request)
             return views.Response({'status': 'OK'}, status=status.HTTP_201_CREATED)
         return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request: views.Request) -> views.Response:
+        budgets = models.Budget.objects.filter(owner=request.user)
+        results = self.paginate_queryset(budgets, request, view=self)
+        serializer = serializers.BudgetSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
