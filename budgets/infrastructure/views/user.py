@@ -10,13 +10,16 @@ class UserRegistrationView(views.APIView):
         serializer = serializers.UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
             request = use_cases.RegisterUserUseCase.Request(
-                email=serializer.validated_data['email'],
-                password=serializer.validated_data['password'],
-                username=serializer.validated_data['username']
+                email=serializer.validated_data["email"],
+                password=serializer.validated_data["password"],
+                username=serializer.validated_data["username"],
             )
             try:
                 use_cases.RegisterUserUseCase().execute(request)
             except exceptions.UserAlreadyExist:
-                return views.Response({'email': 'Email already taken!'}, status=status.HTTP_400_BAD_REQUEST)
-            return views.Response({'status': 'OK'}, status=status.HTTP_201_CREATED)
+                return views.Response(
+                    {"email": "Email already taken!"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            return views.Response({"status": "OK"}, status=status.HTTP_201_CREATED)
         return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

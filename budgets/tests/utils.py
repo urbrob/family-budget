@@ -2,6 +2,7 @@ from django import test
 from django.db import models
 from budgets.tests import factories
 
+
 class BaseTest(test.TestCase):
     def setUp(self) -> None:
         super().setUp()

@@ -16,24 +16,70 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='BudgetBalanceChange',
+            name="BudgetBalanceChange",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.CharField(max_length=256)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('type', models.CharField(choices=[('INCOME', 'INCOME'), ('EXPENSE', 'EXPENSE')], max_length=8)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='balance_changes', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.CharField(max_length=256)),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=8)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[("INCOME", "INCOME"), ("EXPENSE", "EXPENSE")],
+                        max_length=8,
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="balance_changes",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            bases=(budgets.infrastructure.models.mixins.CreateAndUpdateMixin, models.Model),
+            bases=(
+                budgets.infrastructure.models.mixins.CreateAndUpdateMixin,
+                models.Model,
+            ),
         ),
         migrations.CreateModel(
-            name='Budget',
+            name="Budget",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64)),
-                ('members', models.ManyToManyField(related_name='budgets', to=settings.AUTH_USER_MODEL)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64)),
+                (
+                    "members",
+                    models.ManyToManyField(
+                        related_name="budgets", to=settings.AUTH_USER_MODEL
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            bases=(budgets.infrastructure.models.mixins.CreateAndUpdateMixin, models.Model),
+            bases=(
+                budgets.infrastructure.models.mixins.CreateAndUpdateMixin,
+                models.Model,
+            ),
         ),
     ]

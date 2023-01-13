@@ -9,18 +9,24 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('budgets', '0002_budgetbalancechange_budget'),
+        ("budgets", "0002_budgetbalancechange_budget"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='budget',
-            name='members',
-            field=models.ManyToManyField(related_name='shard_budgets', to=settings.AUTH_USER_MODEL),
+            model_name="budget",
+            name="members",
+            field=models.ManyToManyField(
+                related_name="shard_budgets", to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='budget',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='budgets', to=settings.AUTH_USER_MODEL),
+            model_name="budget",
+            name="owner",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="budgets",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

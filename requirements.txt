@@ -7,3 +7,4 @@ djangorestframework-simplejwt
 inject
 factory-boy
 Faker
+black

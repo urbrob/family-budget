@@ -14,4 +14,6 @@ class RegisterUserUseCase:
     def execute(self, request: Request) -> None:
         if models.User.objects.filter(email=request.email).exists():
             raise exceptions.UserAlreadyExist
-        models.User.objects.create_user(username=request.username, email=request.email, password=request.password)
+        models.User.objects.create_user(
+            username=request.username, email=request.email, password=request.password
+        )

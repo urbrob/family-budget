@@ -7,7 +7,7 @@ class CreateBudgetSerializerTestCase(utils.SerializerTestCase):
     def test_validate_with_correct_data(self) -> None:
         # Given
         data = {
-            'name': 'House',
+            "name": "House",
         }
         # When
         serializer = serializers.CreateBudgetSerializer(data=data)
@@ -16,10 +16,9 @@ class CreateBudgetSerializerTestCase(utils.SerializerTestCase):
 
     def test_validate_with_missing_data_throw_errors(self) -> None:
         # Given
-        data = {
-        }
+        data = {}
         expected_errors = {
-            "name": ['This field is required.'],
+            "name": ["This field is required."],
         }
         # When
         serializer = serializers.CreateBudgetSerializer(data=data)
@@ -39,8 +38,5 @@ class BudgetSerializerTestCase(utils.SerializerTestCase):
         serializer = serializers.BudgetSerializer(self.budget)
         data = serializer.data
         # Then
-        self.assertEqual(self.budget.name, data['name'])
-        self.assertEqual(self.budget.id, data['id'])
-
-
-
+        self.assertEqual(self.budget.name, data["name"])
+        self.assertEqual(self.budget.id, data["id"])
