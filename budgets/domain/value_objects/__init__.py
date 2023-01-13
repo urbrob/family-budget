@@ -1,6 +1,5 @@
-__all__ = [
-    'BudgetBalanceChangeType'
-]
+__all__ = ["BudgetBalanceChangeType"]
 
-from budgets.domain.value_objects.budget_balance_change_type import BudgetBalanceChangeType
-
+from budgets.domain.value_objects.budget_balance_change_type import (
+    BudgetBalanceChangeType,
+)

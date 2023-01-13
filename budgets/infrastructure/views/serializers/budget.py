@@ -8,4 +8,10 @@ class CreateBudgetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Budget
-        fields = ('name',)
+        fields = ("name",)
+
+
+class BudgetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Budget
+        fields = ("name", "id")

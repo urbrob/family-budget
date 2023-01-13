@@ -1,5 +1,6 @@
 import inject
 
+
 def includeme() -> None:
     """
     Configure dependency injection for application

@@ -3,12 +3,12 @@ from importlib import import_module
 
 from django.utils.module_loading import module_has_submodule
 
-MODELS_MODULE_NAME = 'infrastructure.models.__init__'
+MODELS_MODULE_NAME = "infrastructure.models.__init__"
 
 
 class BudgetConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'budgets'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "budgets"
 
     def import_models(self) -> None:
         self.models = self.apps.all_models[self.label]

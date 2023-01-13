@@ -7,14 +7,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('budgets', '0001_initial'),
+        ("budgets", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='budgetbalancechange',
-            name='budget',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='balance_changes', to='budgets.budget'),
+            model_name="budgetbalancechange",
+            name="budget",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="balance_changes",
+                to="budgets.budget",
+            ),
             preserve_default=False,
         ),
     ]
