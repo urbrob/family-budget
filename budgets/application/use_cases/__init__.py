@@ -1,5 +1,7 @@
 __all__ = [
-    'RegisterUserUseCase'
+    'RegisterUserUseCase',
+    'CreateBudgetUseCase'
 ]
 
 from budgets.application.use_cases.user import RegisterUserUseCase
+from budgets.application.use_cases.budget import CreateBudgetUseCase

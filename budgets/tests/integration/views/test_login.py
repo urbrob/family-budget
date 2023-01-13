@@ -3,7 +3,7 @@ from django import urls
 
 from budgets.tests.integration.views import utils
 
-class LoginTests(utils.ApiTestCase):
+class LoginViewTests(utils.ApiTestCase):
     def setUp(self) -> None:
         super().setUp()
         self.payload = {
