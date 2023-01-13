@@ -1,9 +1,12 @@
-from django import test
-from budgets.tests import factories, utils
+from django import urls
+from budgets.tests import utils
+from rest_framework import test
+
 
 class ApiTestCase(utils.BaseTest):
     def setUp(self) -> None:
-        self.user = factories.UserFactory()
-        self.client = test.Client()
-        self.authenticated_client = test.Client()
-        self.authenticated_client.login(username=self.user.username, password="12345")
+        super().setUp()
+        self.client = test.APIClient()
+        token = self.client.post(urls.reverse('login'), {'username': self.user.username, 'password': 'pass'}).data['access']
+        self.authenticated_client = test.APIClient()
+        self.authenticated_client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')

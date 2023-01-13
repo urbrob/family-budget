@@ -4,7 +4,7 @@ from django import urls
 from budgets.tests.integration.views import utils
 from budgets.infrastructure import models
 
-class RegisterTests(utils.ApiTestCase):
+class RegisterViewTests(utils.ApiTestCase):
     def setUp(self) -> None:
         super().setUp()
         self.payload = {
