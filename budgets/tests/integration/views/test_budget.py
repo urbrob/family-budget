@@ -121,3 +121,40 @@ class CreateBudgetViewTests(utils.ApiTestCase):
         response = self.client.delete(urls.reverse("budget"), {"id": 1})
         # Then
         self.assertEqual(response.status_code, 401)
+
+    def test_user_can_update_his_budget(self) -> None:
+        # Given
+        special_budget = factories.BudgetFactory(name="special", owner=self.user)
+        new_name = "VERY special budget"
+
+        # When
+        response = self.authenticated_client.put(
+            urls.reverse("budget"), {"name": new_name, "id": special_budget.id}
+        )
+        # Then
+        self.assertEqual(response.status_code, 200)
+        self.assertModelExist(models.Budget, name=new_name)
+
+    def test_user_can_not_update_someone_else_budget(self) -> None:
+        # Given
+        special_user = factories.UserFactory()
+        special_budget = factories.BudgetFactory(name="special", owner=special_user)
+        new_name = "VERY special budget"
+
+        # When
+        response = self.authenticated_client.put(
+            urls.reverse("budget"), {"name": new_name, "id": special_budget.id}
+        )
+        # Then
+        self.assertEqual(response.status_code, 400)
+        self.assertModelNotExist(models.Budget, name=new_name)
+
+    def test_user_can_not_delete_budgets_when_he_is_not_authenticated(self) -> None:
+        # Given
+
+        # When
+        response = self.client.put(urls.reverse("budget"), {"name": "Special name", "id": 1})
+        # Then
+        self.assertEqual(response.status_code, 401)
+
+

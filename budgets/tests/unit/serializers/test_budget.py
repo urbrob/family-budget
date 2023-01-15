@@ -64,3 +64,31 @@ class DeleteSerializerTestCase(utils.SerializerTestCase):
         serializer.is_valid()
         # Then
         self.assertValidationErrors(serializer, expected_errors)
+
+
+class UpdateSerializerTestCase(utils.SerializerTestCase):
+    def test_validate_with_correct_data(self) -> None:
+        # Given
+        data = {
+            "id": 1,
+            "name": "Grocery",
+            "owner_id": 1
+        }
+        # When
+        serializer = serializers.UpdateBudgetSerializer(data=data, run_policies=False)
+        # Then
+        self.assertTrue(serializer.is_valid())
+
+    def test_validate_with_missing_data_throw_errors(self) -> None:
+        # Given
+        data = {}
+        expected_errors = {
+            "id": ["This field is required."],
+            "name": ["This field is required."],
+            "owner_id": ["This field is required."]
+        }
+        # When
+        serializer = serializers.UpdateBudgetSerializer(data=data)
+        serializer.is_valid()
+        # Then
+        self.assertValidationErrors(serializer, expected_errors)
