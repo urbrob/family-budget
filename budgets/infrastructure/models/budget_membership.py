@@ -12,6 +12,6 @@ class BudgetMembership(mixins.CreateAndUpdateMixin, django_models.Model):
         User, on_delete=django_models.CASCADE, related_name="shared_budgets"
     )
     budget = django_models.ForeignKey(
-        'budgets.Budget', on_delete=django_models.CASCADE, related_name="shared_users"
+        "budgets.Budget", on_delete=django_models.CASCADE, related_name="shared_users"
     )
     accepted = django_models.BooleanField(default=False)

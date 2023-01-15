@@ -20,7 +20,9 @@ class DeleteBudgetUseCase:
         user_id: int
 
     def execute(self, request: Request) -> None:
-        models.Budget.objects.filter(id=request.budget_id, owner_id=request.user_id).delete()
+        models.Budget.objects.filter(
+            id=request.budget_id, owner_id=request.user_id
+        ).delete()
 
 
 class UpdateBudgetUseCase:

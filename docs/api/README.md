@@ -182,3 +182,25 @@ I am using readme docs just for simplicity of application. Normally i would use 
     "status": "OK"
 }
 ````
+## Accept invitation to budget
+#### Date of contract: 11.01.2023
+#### UR: api/v1/invitation
+####  METHOD: PATCH
+### PARAMS:
+````
+{
+    "invitation_id": int,
+}
+````
+### Example body:
+````
+{
+    "invitation_id": int,
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````

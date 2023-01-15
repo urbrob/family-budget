@@ -153,8 +153,8 @@ class BudgetViewTests(utils.ApiTestCase):
         # Given
 
         # When
-        response = self.client.put(urls.reverse("budget"), {"name": "Special name", "id": 1})
+        response = self.client.put(
+            urls.reverse("budget"), {"name": "Special name", "id": 1}
+        )
         # Then
         self.assertEqual(response.status_code, 401)
-
-
