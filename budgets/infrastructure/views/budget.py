@@ -21,13 +21,13 @@ class BudgetView(views.APIView, pagination.LimitOffsetPagination):
         data = {
             "owner_id": request.user.id,
             "name": request.data.get("name"),
-            "id": request.data.get("id")
+            "id": request.data.get("id"),
         }
         serializer = serializers.UpdateBudgetSerializer(data=data)
         if serializer.is_valid():
             request = use_cases.UpdateBudgetUseCase.Request(
                 name=serializer.validated_data["name"],
-                budget_id=serializer.validated_data["id"]
+                budget_id=serializer.validated_data["id"],
             )
             use_cases.UpdateBudgetUseCase().execute(request)
             return views.Response({"status": "OK"}, status=status.HTTP_200_OK)

@@ -18,3 +18,12 @@ class BudgetFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker("name")
     owner = factory.SubFactory(UserFactory)
+
+
+class BudgetMembershipFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.BudgetMembership
+
+    budget = factory.SubFactory(BudgetFactory)
+    user = factory.SubFactory(UserFactory)
+    accepted = False

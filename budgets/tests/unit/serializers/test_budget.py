@@ -69,11 +69,7 @@ class DeleteSerializerTestCase(utils.SerializerTestCase):
 class UpdateSerializerTestCase(utils.SerializerTestCase):
     def test_validate_with_correct_data(self) -> None:
         # Given
-        data = {
-            "id": 1,
-            "name": "Grocery",
-            "owner_id": 1
-        }
+        data = {"id": 1, "name": "Grocery", "owner_id": 1}
         # When
         serializer = serializers.UpdateBudgetSerializer(data=data, run_policies=False)
         # Then
@@ -85,7 +81,7 @@ class UpdateSerializerTestCase(utils.SerializerTestCase):
         expected_errors = {
             "id": ["This field is required."],
             "name": ["This field is required."],
-            "owner_id": ["This field is required."]
+            "owner_id": ["This field is required."],
         }
         # When
         serializer = serializers.UpdateBudgetSerializer(data=data)

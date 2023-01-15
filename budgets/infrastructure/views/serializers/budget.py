@@ -20,9 +20,7 @@ class BudgetSerializer(serializers.ModelSerializer):
 
 
 class UpdateBudgetSerializer(utils.ModelWithPolicySerializer):
-    policies = [
-        budget_polcies.budget_belongs_to_user_policy
-    ]
+    policies = [budget_polcies.budget_belongs_to_user_policy]
     id = serializers.IntegerField(required=True)
     owner_id = serializers.IntegerField(required=True)
 
@@ -37,4 +35,3 @@ class DeleteBudgetSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Budget
         fields = ("id",)
-
