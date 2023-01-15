@@ -158,3 +158,27 @@ I am using readme docs just for simplicity of application. Normally i would use 
     "status": "OK"
 }
 ````
+## Invite User to budget
+#### Date of contract: 11.01.2023
+#### UR: api/v1/invitation
+####  METHOD: POST
+### PARAMS:
+````
+{
+    "email": str,
+    "budget_id": int,
+}
+````
+### Example body:
+````
+{
+    "email": "urb.rob@o2.pl,
+    "budget_id": 1,
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````

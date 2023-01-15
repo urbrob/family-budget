@@ -6,7 +6,7 @@ from budgets.tests import factories
 from budgets.infrastructure import models
 
 
-class CreateBudgetViewTests(utils.ApiTestCase):
+class BudgetViewTests(utils.ApiTestCase):
     def setUp(self) -> None:
         super().setUp()
         factories.BudgetFactory.create_batch(15, owner=self.user)
