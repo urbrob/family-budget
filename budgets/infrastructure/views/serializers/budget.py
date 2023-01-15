@@ -15,3 +15,11 @@ class BudgetSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Budget
         fields = ("name", "id")
+
+
+class DeleteBudgetSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=True)
+    class Meta:
+        model = models.Budget
+        fields = ("id",)
+
