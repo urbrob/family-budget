@@ -40,3 +40,27 @@ class BudgetSerializerTestCase(utils.SerializerTestCase):
         # Then
         self.assertEqual(self.budget.name, data["name"])
         self.assertEqual(self.budget.id, data["id"])
+
+
+class DeleteSerializerTestCase(utils.SerializerTestCase):
+    def test_validate_with_correct_data(self) -> None:
+        # Given
+        data = {
+            "id": 1,
+        }
+        # When
+        serializer = serializers.DeleteBudgetSerializer(data=data)
+        # Then
+        self.assertTrue(serializer.is_valid())
+
+    def test_validate_with_missing_data_throw_errors(self) -> None:
+        # Given
+        data = {}
+        expected_errors = {
+            "id": ["This field is required."],
+        }
+        # When
+        serializer = serializers.DeleteBudgetSerializer(data=data)
+        serializer.is_valid()
+        # Then
+        self.assertValidationErrors(serializer, expected_errors)

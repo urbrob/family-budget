@@ -25,3 +25,13 @@ class BudgetView(views.APIView, pagination.LimitOffsetPagination):
         results = self.paginate_queryset(queryset, request, view=self)
         serializer = serializers.BudgetSerializer(results, many=True)
         return self.get_paginated_response(serializer.data)
+
+    def delete(self, request: views.Request) -> views.Response:
+        serializer = serializers.DeleteBudgetSerializer(data=request.data)
+        if serializer.is_valid():
+            request = use_cases.DeleteBudgetUseCase.Request(
+                budget_id=serializer.validated_data["id"], user_id=request.user.id
+            )
+            use_cases.DeleteBudgetUseCase().execute(request)
+            return views.Response({"status": "OK"}, status=status.HTTP_200_OK)
+        return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -111,3 +111,25 @@ I am using readme docs just for simplicity of application. Normally i would use 
     ]
 }
 ````
+## Budget Delete
+#### Date of contract: 11.01.2023
+#### UR: api/v1/budget
+####  METHOD: DELETE
+### PARAMS:
+````
+{
+    "id": int,
+}
+````
+### Example body:
+````
+{
+    "id": 1,
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````
