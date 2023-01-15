@@ -11,6 +11,7 @@ class ModelWithPolicySerializer(serializers.ModelSerializer):
     def prepare_data_to_policies(self, attrs: dict):
         return attrs
 
+
     def validate(self, attrs: dict) -> dict:
         attrs = super().validate(attrs)
         if self.run_policies:

@@ -11,3 +11,4 @@ class Budget(mixins.CreateAndUpdateMixin, django_models.Model):
     user_members = django_models.ManyToManyField(User, through=BudgetMembership, related_name="shard_budgets")
     name = django_models.TextField()
     owner = django_models.ForeignKey(User, on_delete=django_models.CASCADE, related_name="budgets")
+
