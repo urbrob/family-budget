@@ -36,3 +36,18 @@ class AcceptInvitationSerializer(utils.ModelWithPolicySerializer):
     class Meta:
         model = models.BudgetMembership
         fields = ("invitation_id", "user_id")
+
+
+class InvitationSerializer(serializers.ModelSerializer):
+
+    def to_representation(self, instance: models.BudgetMembership) -> dict:
+        data = super().to_representation(instance)
+        data['name'] = instance.budget.name
+        data['owner'] = instance.budget.owner.email
+        return data
+
+
+    class Meta:
+        model = models.BudgetMembership
+        fields = ['accepted']
+        depth = 1

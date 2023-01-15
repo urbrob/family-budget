@@ -1,4 +1,5 @@
 from budgets.application import use_cases
+from budgets.infrastructure import models
 from budgets.infrastructure.views import serializers
 from rest_framework import permissions, views, status, pagination
 
@@ -36,3 +37,14 @@ class InvitationView(views.APIView, pagination.LimitOffsetPagination):
             use_cases.AcceptInvitationUseCase().execute(request)
             return views.Response({"status": "OK"}, status=status.HTTP_201_CREATED)
         return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request: views.Request) -> views.Response:
+        queryset = models.BudgetMembership.objects.filter(user=request.user)
+        if name := self.request.query_params.get("name"):
+            queryset = queryset.filter(budget__name=name)
+        if activated := self.request.query_params.get("activated"):
+            queryset = queryset.filter(activated=activated)
+
+        results = self.paginate_queryset(queryset, request, view=self)
+        serializer = serializers.InvitationSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)

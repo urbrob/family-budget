@@ -114,3 +114,22 @@ class InvitationViewTests(utils.ApiTestCase):
             user=self.user.id,
             accepted=True,
         )
+
+    def test_should_return_users_invitations(self):
+        # Given
+        special_user = factories.UserFactory()
+        budgets = factories.BudgetFactory.create_batch(2, owner=special_user)
+        invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[0])
+        second_invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[0])
+
+        # When
+        response = self.authenticated_client.get(urls.reverse("invitation"))
+        results = response.data["results"]
+        first_result = results[0]
+
+        # Then
+        self.assertEqual(len(results), 2)
+        self.assertEqual(first_result['name'], budgets[0].name)
+        self.assertEqual(first_result['owner'], special_user.email)
+        self.assertEqual(first_result['accepted'], invitation.accepted)
+
