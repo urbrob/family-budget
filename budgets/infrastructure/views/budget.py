@@ -17,6 +17,22 @@ class BudgetView(views.APIView, pagination.LimitOffsetPagination):
             return views.Response({"status": "OK"}, status=status.HTTP_201_CREATED)
         return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def put(self, request: views.Request) -> views.Response:
+        data = {
+            "owner_id": request.user.id,
+            "name": request.data.get("name"),
+            "id": request.data.get("id")
+        }
+        serializer = serializers.UpdateBudgetSerializer(data=data)
+        if serializer.is_valid():
+            request = use_cases.UpdateBudgetUseCase.Request(
+                name=serializer.validated_data["name"],
+                budget_id=serializer.validated_data["id"]
+            )
+            use_cases.UpdateBudgetUseCase().execute(request)
+            return views.Response({"status": "OK"}, status=status.HTTP_200_OK)
+        return views.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def get(self, request: views.Request) -> views.Response:
 
         queryset = models.Budget.objects.filter(owner=request.user)

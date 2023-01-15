@@ -133,3 +133,28 @@ I am using readme docs just for simplicity of application. Normally i would use 
     "status": "OK"
 }
 ````
+
+## Budget Update
+#### Date of contract: 11.01.2023
+#### UR: api/v1/budget
+####  METHOD: PUT
+### PARAMS:
+````
+{
+    "id": int,
+    "name": str,
+}
+````
+### Example body:
+````
+{
+    "id": 1,
+    "name": "New name",
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````

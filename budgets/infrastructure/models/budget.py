@@ -8,5 +8,5 @@ User = get_user_model()
 
 class Budget(mixins.CreateAndUpdateMixin, models.Model):
     members = models.ManyToManyField(User, related_name="shard_budgets")
-    name = models.CharField(max_length=64)
+    name = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="budgets")

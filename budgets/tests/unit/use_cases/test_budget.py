@@ -36,3 +36,21 @@ class DeleteBudgetUseCaseTestCase(utils.BaseTest):
         self.assertModelNotExist(
             models.Budget, id=budget.id, owner_id=budget.owner_id
         )
+
+class DeleteBudgetUseCaseTestCase(utils.BaseTest):
+    def test_should_delete_budget(self):
+        # Given
+        budget = factories.BudgetFactory(owner=self.user)
+        request = use_cases.UpdateBudgetUseCase.Request(
+            budget_id=budget.id, name="NEW_NAME"
+        )
+        # When
+        use_cases.UpdateBudgetUseCase().execute(request)
+
+        # Then
+        self.assertModelNotExist(
+            models.Budget, id=budget.id, name=budget.name
+        )
+        self.assertModelExist(
+            models.Budget, id=budget.id, name=request.name
+        )
