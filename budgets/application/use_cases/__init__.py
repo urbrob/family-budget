@@ -5,7 +5,7 @@ __all__ = [
     "UpdateBudgetUseCase",
     "SendInvitationUseCase",
     "AcceptInvitationUseCase",
-    "CreateBalanceChangeUseCase"
+    "CreateBalanceChangeUseCase",
 ]
 
 from budgets.application.use_cases.user import RegisterUserUseCase

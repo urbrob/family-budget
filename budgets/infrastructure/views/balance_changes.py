@@ -17,17 +17,21 @@ class BalanceChangeView(views.APIView, pagination.LimitOffsetPagination):
             "amount": request.data.get("amount"),
             "description": request.data.get("description"),
             "category": request.data.get("category"),
-            "owner": request.user.id
+            "owner": request.user.id,
         }
         serializer = serializers.BalanceChangeSerializer(data=data)
         if serializer.is_valid():
             request = use_cases.CreateBalanceChangeUseCase.Request(
                 budget=serializer.validated_data["budget"],
-                type=value_objects.BudgetBalanceChangeType(serializer.validated_data["type"]),
+                type=value_objects.BudgetBalanceChangeType(
+                    serializer.validated_data["type"]
+                ),
                 amount=decimal.Decimal(serializer.validated_data["amount"]),
                 description=serializer.validated_data["description"],
-                category=value_objects.BudgetBalanceChangeCategory(serializer.validated_data["category"]),
-                owner=serializer.validated_data["owner"]
+                category=value_objects.BudgetBalanceChangeCategory(
+                    serializer.validated_data["category"]
+                ),
+                owner=serializer.validated_data["owner"],
             )
             use_cases.CreateBalanceChangeUseCase().execute(request)
             return views.Response({"status": "OK"}, status=status.HTTP_201_CREATED)

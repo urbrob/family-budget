@@ -5,4 +5,3 @@ class BudgetBalanceChangeCategory(enum.ChoiceEnum):
     OTHER = "OTHER"
     GROCERY = "GROCERY"
     TAXES = "TAXES"
-

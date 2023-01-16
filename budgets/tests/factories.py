@@ -12,6 +12,7 @@ class UserFactory(factory.django.DjangoModelFactory):
     email = factory.Faker("email")
     password = factory.PostGenerationMethodCall("set_password", "pass")
 
+
 class BudgetBalanceFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.BudgetBalanceChange

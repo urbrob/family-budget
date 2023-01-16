@@ -30,9 +30,7 @@ class AcceptInvitationUseCaseTestCase(utils.BaseTest):
         # Given
         budget = factories.BudgetFactory(owner=self.user)
         invitation = factories.BudgetMembershipFactory(user=self.user, budget=budget)
-        request = use_cases.AcceptInvitationUseCase.Request(
-            invitation_id=invitation.id
-        )
+        request = use_cases.AcceptInvitationUseCase.Request(invitation_id=invitation.id)
         # When
         use_cases.AcceptInvitationUseCase().execute(request)
 

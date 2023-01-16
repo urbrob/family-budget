@@ -14,5 +14,9 @@ urlpatterns = [
     path("api/v1/register", views.UserRegistrationView.as_view(), name="register"),
     path("api/v1/budget", views.BudgetView.as_view(), name="budget"),
     path("api/v1/budget/invitation", views.InvitationView.as_view(), name="invitation"),
-    path("api/v1/budget/balance_change", views.BalanceChangeView.as_view(), name="balance_change")
+    path(
+        "api/v1/budget/balance_change",
+        views.BalanceChangeView.as_view(),
+        name="balance_change",
+    ),
 ]

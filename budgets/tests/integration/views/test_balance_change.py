@@ -12,7 +12,6 @@ class BalanceChangeViewTests(utils.ApiTestCase):
         super().setUp()
         self.budget = factories.BudgetFactory.create(owner=self.user)
 
-
     def test_user_can_create_balance_change(self) -> None:
         # Given
         payload = {
@@ -20,7 +19,7 @@ class BalanceChangeViewTests(utils.ApiTestCase):
             "type": value_objects.BudgetBalanceChangeType.INCOME.value,
             "amount": "100",
             "description": "Very much moni",
-            "category": value_objects.BudgetBalanceChangeCategory.GROCERY.value
+            "category": value_objects.BudgetBalanceChangeCategory.GROCERY.value,
         }
         # When
         response = self.authenticated_client.post(

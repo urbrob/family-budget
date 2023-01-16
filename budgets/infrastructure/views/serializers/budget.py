@@ -17,10 +17,16 @@ class CreateBudgetSerializer(serializers.ModelSerializer):
 
 class BudgetSerializer(serializers.ModelSerializer):
     balance_changes = balance_change.BalanceChangeSerializer(read_only=True, many=True)
+
     def to_representation(self, instance: models.Budget) -> dict:
         data = super().to_representation(instance)
-        data["balance"] = models.BudgetBalanceChange.objects.filter(budget=data["id"]).aggregate(Sum("amount")).get("amount__sum", 0)
+        data["balance"] = (
+            models.BudgetBalanceChange.objects.filter(budget=data["id"])
+            .aggregate(Sum("amount"))
+            .get("amount__sum", 0)
+        )
         return data
+
     class Meta:
         model = models.Budget
         fields = ("name", "id", "balance_changes")

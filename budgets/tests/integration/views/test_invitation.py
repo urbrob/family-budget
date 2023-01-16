@@ -119,8 +119,12 @@ class InvitationViewTests(utils.ApiTestCase):
         # Given
         special_user = factories.UserFactory()
         budgets = factories.BudgetFactory.create_batch(2, owner=special_user)
-        invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[0])
-        second_invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[1])
+        invitation = factories.BudgetMembershipFactory(
+            user=self.user, budget=budgets[0]
+        )
+        second_invitation = factories.BudgetMembershipFactory(
+            user=self.user, budget=budgets[1]
+        )
 
         # When
         response = self.authenticated_client.get(urls.reverse("invitation"))
@@ -129,25 +133,30 @@ class InvitationViewTests(utils.ApiTestCase):
 
         # Then
         self.assertEqual(len(results), 2)
-        self.assertEqual(first_result['name'], budgets[0].name)
-        self.assertEqual(first_result['owner'], special_user.email)
-        self.assertEqual(first_result['accepted'], invitation.accepted)
+        self.assertEqual(first_result["name"], budgets[0].name)
+        self.assertEqual(first_result["owner"], special_user.email)
+        self.assertEqual(first_result["accepted"], invitation.accepted)
 
     def test_should_return_users_invitations_filtered_by_name(self):
         # Given
         special_user = factories.UserFactory()
         budgets = factories.BudgetFactory.create_batch(2, owner=special_user)
-        invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[0])
-        second_invitation = factories.BudgetMembershipFactory(user=self.user, budget=budgets[1])
+        invitation = factories.BudgetMembershipFactory(
+            user=self.user, budget=budgets[0]
+        )
+        second_invitation = factories.BudgetMembershipFactory(
+            user=self.user, budget=budgets[1]
+        )
 
         # When
-        response = self.authenticated_client.get(urls.reverse("invitation"), data={"name": budgets[0].name})
+        response = self.authenticated_client.get(
+            urls.reverse("invitation"), data={"name": budgets[0].name}
+        )
         results = response.data["results"]
         first_result = results[0]
 
         # Then
         self.assertEqual(len(results), 1)
-        self.assertEqual(first_result['name'], budgets[0].name)
-        self.assertEqual(first_result['owner'], special_user.email)
-        self.assertEqual(first_result['accepted'], invitation.accepted)
-
+        self.assertEqual(first_result["name"], budgets[0].name)
+        self.assertEqual(first_result["owner"], special_user.email)
+        self.assertEqual(first_result["accepted"], invitation.accepted)

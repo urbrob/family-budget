@@ -32,7 +32,9 @@ class AcceptInvitationSerializerTestCase(utils.SerializerTestCase):
         # Given
         data = {"invitation_id": 1, "user_id": 1}
         # When
-        serializer = serializers.AcceptInvitationSerializer(data=data, run_policies=False)
+        serializer = serializers.AcceptInvitationSerializer(
+            data=data, run_policies=False
+        )
         # Then
         self.assertTrue(serializer.is_valid())
 
@@ -44,7 +46,9 @@ class AcceptInvitationSerializerTestCase(utils.SerializerTestCase):
             "user_id": ["This field is required."],
         }
         # When
-        serializer = serializers.AcceptInvitationSerializer(data=data, run_policies=False)
+        serializer = serializers.AcceptInvitationSerializer(
+            data=data, run_policies=False
+        )
         serializer.is_valid()
         # Then
         self.assertValidationErrors(serializer, expected_errors)

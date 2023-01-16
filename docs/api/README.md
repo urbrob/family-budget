@@ -88,13 +88,7 @@ I am using readme docs just for simplicity of application. Normally i would use 
 {
     "limit": int,
     "offset": int,
-}
-````
-### Example body:
-````
-{
-    "limit": 1,
-    "offset": 1,
+    "name": str
 }
 ````
 ### Response:
@@ -107,6 +101,8 @@ I am using readme docs just for simplicity of application. Normally i would use 
         {
             "id": int,
             "name": str,
+            "balance": str,
+            "balance_changes": List[BalanceChange]
         }
     ]
 }
@@ -196,6 +192,49 @@ I am using readme docs just for simplicity of application. Normally i would use 
 ````
 {
     "invitation_id": int,
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````
+## Accept invitation to budget
+#### Date of contract: 11.01.2023
+#### UR: api/v1/invitation
+####  METHOD: PATCH
+### PARAMS:
+````
+{
+    "invitation_id": int,
+}
+````
+### Example body:
+````
+{
+    "invitation_id": int,
+}
+````
+### Response:
+````
+{
+    "status": "OK"
+}
+````
+## Create Budget balance change
+#### Date of contract: 11.01.2023
+#### UR: api/v1/budget/balance_change
+####  METHOD: POST
+### PARAMS:
+````
+{
+    "budget": int,
+    "type": str #EXPENSE, INCOME,
+    "amount": str,
+    "description": str,
+    "category": str # GROCERY, TAXES, OTHER
+    "owner": int
 }
 ````
 ### Response:

@@ -21,5 +21,5 @@ class CreateBalanceChangeUseCase:
             amount=request.amount,
             description=request.description,
             owner=request.owner,
-            category=request.category.value
+            category=request.category.value,
         )

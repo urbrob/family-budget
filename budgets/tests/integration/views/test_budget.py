@@ -10,7 +10,9 @@ class BudgetViewTests(utils.ApiTestCase):
     def setUp(self) -> None:
         super().setUp()
         self.budgets = factories.BudgetFactory.create_batch(15, owner=self.user)
-        self.balances = factories.BudgetBalanceFactory.create_batch(2, budget=self.budgets[0], owner=self.user)
+        self.balances = factories.BudgetBalanceFactory.create_batch(
+            2, budget=self.budgets[0], owner=self.user
+        )
         self.balance_amount = self.balances[0].amount + self.balances[1].amount
 
     def test_user_can_create_budget(self) -> None:
@@ -55,7 +57,7 @@ class BudgetViewTests(utils.ApiTestCase):
             len(response_body["results"]),
             models.Budget.objects.filter(owner=self.user).count(),
         )
-        self.assertEqual(response_body['results'][0]['balance'], self.balance_amount)
+        self.assertEqual(response_body["results"][0]["balance"], self.balance_amount)
 
     def test_user_can_return_all_his_budgets_with_pagination(self) -> None:
         # Given
