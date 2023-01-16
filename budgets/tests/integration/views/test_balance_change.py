@@ -20,6 +20,7 @@ class BalanceChangeViewTests(utils.ApiTestCase):
             "type": value_objects.BudgetBalanceChangeType.INCOME.value,
             "amount": "100",
             "description": "Very much moni",
+            "category": value_objects.BudgetBalanceChangeCategory.GROCERY.value
         }
         # When
         response = self.authenticated_client.post(

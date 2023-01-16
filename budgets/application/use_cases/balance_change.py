@@ -12,6 +12,7 @@ class CreateBalanceChangeUseCase:
         amount: decimal.Decimal
         description: str
         owner: int
+        category: value_objects.BudgetBalanceChangeCategory
 
     def execute(self, request: Request) -> None:
         models.BudgetBalanceChange.objects.create(
@@ -19,5 +20,6 @@ class CreateBalanceChangeUseCase:
             type=request.type.value,
             amount=request.amount,
             description=request.description,
-            owner=request.owner
+            owner=request.owner,
+            category=request.category.value
         )

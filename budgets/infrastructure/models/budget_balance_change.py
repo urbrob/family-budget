@@ -17,6 +17,9 @@ class BudgetBalanceChange(mixins.CreateAndUpdateMixin, django_models.Model):
     type = django_models.CharField(
         max_length=16, choices=value_objects.BudgetBalanceChangeType.choices()
     )
+    category = django_models.CharField(
+        max_length=16, choices=value_objects.BudgetBalanceChangeCategory.choices()
+    )
     owner = django_models.ForeignKey(
         User, on_delete=django_models.CASCADE, related_name="balance_changes"
     )
