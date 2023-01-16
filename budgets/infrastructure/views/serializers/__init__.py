@@ -6,7 +6,8 @@ __all__ = [
     "UpdateBudgetSerializer",
     "SendInvitationSerializer",
     "AcceptInvitationSerializer",
-    "InvitationSerializer"
+    "InvitationSerializer",
+    "BalanceChangeSerializer"
 ]
 
 
@@ -22,3 +23,4 @@ from budgets.infrastructure.views.serializers.invitation import (
     AcceptInvitationSerializer,
     InvitationSerializer
 )
+from budgets.infrastructure.views.serializers.balance_change import BalanceChangeSerializer
